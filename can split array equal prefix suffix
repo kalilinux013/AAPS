@@ -1,0 +1,10 @@
+public boolean cansplitarrayequalprefixsuffix(int[] nums) {
+    int total = Arrays.stream(nums).sum(), prefix = 0;
+    for (int i = 0; i < nums.length - 1; i++) {
+        prefix += nums[i];
+        if (prefix == total - prefix) return true;
+    }
+    return false;
+}
+// Time: O(n)
+// Space: O(1)

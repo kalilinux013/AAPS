@@ -1,0 +1,23 @@
+public List<String> generateallpermutationsofstring(String s) {
+    List<String> result = new ArrayList<>();
+    boolean[] used = new boolean[s.length()];
+    backtrack(s.toCharArray(), new StringBuilder(), used, result);
+    return result;
+}
+
+private void backtrack(char[] chars, StringBuilder sb, boolean[] used, List<String> result) {
+    if (sb.length() == chars.length) {
+        result.add(sb.toString());
+        return;
+    }
+    for (int i = 0; i < chars.length; i++) {
+        if (used[i]) continue;
+        used[i] = true;
+        sb.append(chars[i]);
+        backtrack(chars, sb, used, result);
+        sb.deleteCharAt(sb.length() - 1);
+        used[i] = false;
+    }
+}
+// Time: O(n!) for n characters
+// Space: O(n) for recursion and result storage

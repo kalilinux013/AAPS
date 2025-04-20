@@ -1,0 +1,26 @@
+import java.util.*;
+
+public class nextgreaterelement {
+    public static int[] next_greater_elements(int[] nums) {
+        int[] result = new int[nums.length];
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = nums.length - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && stack.peek() <= nums[i]) {
+                stack.pop();
+            }
+            result[i] = stack.isEmpty() ? -1 : stack.peek();
+            stack.push(nums[i]);
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] input = {2, 1, 2, 4, 3};
+        System.out.println("Next greater elements: " + Arrays.toString(next_greater_elements(input)));
+    }
+}
+
+// time complexity: O(n)
+// space complexity: O(n)

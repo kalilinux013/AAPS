@@ -1,0 +1,29 @@
+import java.util.*;
+
+public class subsetsgenerator {
+    public static List<List<Integer>> generate_subsets(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        generate(0, nums, new ArrayList<>(), result);
+        return result;
+    }
+
+    private static void generate(int index, int[] nums, List<Integer> current, List<List<Integer>> result) {
+        if (index == nums.length) {
+            result.add(new ArrayList<>(current));
+            return;
+        }
+
+        generate(index + 1, nums, current, result); // Exclude
+        current.add(nums[index]);
+        generate(index + 1, nums, current, result); // Include
+        current.remove(current.size() - 1);
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {1, 2, 3};
+        System.out.println("Subsets: " + generate_subsets(nums));
+    }
+}
+
+// time complexity: O(2^n)
+// space complexity: O(n) for recursion stack

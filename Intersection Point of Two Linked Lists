@@ -1,0 +1,39 @@
+public class intersectionoflinkedlists {
+    static class listnode {
+        int val;
+        listnode next;
+        listnode(int x) { val = x; }
+    }
+
+    public static listnode get_intersection_node(listnode headA, listnode headB) {
+        if (headA == null || headB == null) return null;
+
+        listnode a = headA;
+        listnode b = headB;
+
+        while (a != b) {
+            a = (a == null) ? headB : a.next;
+            b = (b == null) ? headA : b.next;
+        }
+
+        return a;
+    }
+
+    public static void main(String[] args) {
+        listnode intersect = new listnode(8);
+        intersect.next = new listnode(10);
+
+        listnode headA = new listnode(3);
+        headA.next = new listnode(7);
+        headA.next.next = intersect;
+
+        listnode headB = new listnode(99);
+        headB.next = intersect;
+
+        listnode result = get_intersection_node(headA, headB);
+        System.out.println("Intersection node value: " + (result != null ? result.val : "No Intersection"));
+    }
+}
+
+// time complexity: O(m + n)
+// space complexity: O(1)

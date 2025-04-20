@@ -1,0 +1,33 @@
+import java.util.*;
+
+public class combinationsum {
+    public static List<List<Integer>> combination_sum(int[] candidates, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        backtrack(0, candidates, target, new ArrayList<>(), result);
+        return result;
+    }
+
+    private static void backtrack(int start, int[] candidates, int target, List<Integer> current, List<List<Integer>> result) {
+        if (target == 0) {
+            result.add(new ArrayList<>(current));
+            return;
+        }
+
+        if (target < 0) return;
+
+        for (int i = start; i < candidates.length; i++) {
+            current.add(candidates[i]);
+            backtrack(i, candidates, target - candidates[i], current, result);
+            current.remove(current.size() - 1);
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] candidates = {2, 3, 6, 7};
+        int target = 7;
+        System.out.println("Combinations that sum to target: " + combination_sum(candidates, target));
+    }
+}
+
+// time complexity: O(2^target)
+// space complexity: O(target)
